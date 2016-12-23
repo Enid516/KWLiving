@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="games_role">游戏角色</string>
+    <string name="role_werewolves">狼人</string>
+    <string name="role_villager">村民</string>
+    <string name="role_seer">预言家</string>
+    <string name="role_thief">盗贼</string>
+    <string name="role_hunter">猎人</string>
+    <string name="role_cupid">丘比特</string>
+    <string name="role_witch">女巫</string>
+    <string name="role_little_girl">小女孩</string>
+    <string name="role_sheriff">警长</string>
+    
+    <string name="participant_number">参与者人数</string>
+</resources>
