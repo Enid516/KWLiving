@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.enid.kwliving.constant.Constant;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -38,14 +40,13 @@ public class ServerUDPBoardCast {
      */
     private String serverIP;
     private static int BROADCAST_PORT = 1234;
-    private static int SERVER_SOCKET_PORT = 4444;
     private static String HOST = "224.0.0.1";
     private MulticastSocket multicastSocket;
     private InetAddress inetAddress;
     private ServerSocket serverSocket;
     private ExecutorService executorService;
     /**
-     * 客服端集合
+     * 客户端集合
      */
     private List<Socket> socketList = new ArrayList<>();
     /**
@@ -53,7 +54,7 @@ public class ServerUDPBoardCast {
      */
     private static final int CODE_CLIENT_SEND_MESSAGE = 0x2001;
     /**
-     * 客服端连接成功
+     * 客户端连接成功
      */
     private static final int CODE_CLIENT_CONNECT_SUCCESS = 0x2002;
     /**
@@ -68,9 +69,9 @@ public class ServerUDPBoardCast {
             switch (msg.what) {
                 case 0x1237://服务器连接失败
                     break;
-                case CODE_CLIENT_CONNECT_SUCCESS://客服端连接服务器成功
+                case CODE_CLIENT_CONNECT_SUCCESS://客户端连接服务器成功
                     break;
-                case CODE_CLIENT_SEND_MESSAGE://客服端发送消息
+                case CODE_CLIENT_SEND_MESSAGE://客户端发送消息
                     break;
                 case CODE_CLIENT_CONNECT_ERROR://客户端连接错误
                     break;
@@ -176,11 +177,11 @@ public class ServerUDPBoardCast {
         public void run() {
             super.run();
             try {
-                serverSocket = new ServerSocket(SERVER_SOCKET_PORT);
+                serverSocket = new ServerSocket(Constant.PORT);
                 Socket clientSocket;
                 while (true) {
                     clientSocket = serverSocket.accept();
-                    //添加客户端到客服端集合
+                    //添加客户端到客户端集合
                     if (!isConnect(clientSocket)) {
                         socketList.add(clientSocket);
                         sendHandlerMessage("当前连接数：" + socketList.size(), CODE_CLIENT_CONNECT_SUCCESS);

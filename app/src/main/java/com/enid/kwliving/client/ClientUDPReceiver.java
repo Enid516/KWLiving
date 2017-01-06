@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.enid.kwliving.constant.Constant;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,11 +24,6 @@ import java.net.UnknownHostException;
  */
 
 public class ClientUDPReceiver {
-
-    /**
-     * 监听的端口号
-     */
-    private static int PORT = 4444;
     InetAddress inetAddress = null;
     /**
      * 服务端的局域网IP,或动态获得IP.
@@ -64,7 +61,7 @@ public class ClientUDPReceiver {
                         public void run() {
                             super.run();
                             try {
-                                socket = new Socket(ip, PORT);
+                                socket = new Socket(ip, Constant.PORT);
                                 new ReceiverThread();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -196,12 +193,11 @@ public class ClientUDPReceiver {
         public void run() {
             try {
                 InetAddress serverAddress = InetAddress.getByName(mIpAddress);//
-                Socket s = new Socket(serverAddress, PORT);
+                Socket s = new Socket(serverAddress, Constant.PORT);
                 s.setSoTimeout(2000);
                 OutputStream outputStream = s.getOutputStream();
                 PrintWriter printWriter = new PrintWriter(outputStream, true);
                 printWriter.println(userInput);
-//                outputStream.flush();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 String msg = reader.readLine();
                 Message message = new Message();
