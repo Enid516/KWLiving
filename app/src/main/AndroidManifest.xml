@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".ServerActivity"></activity>
         <activity android:name=".ClientActivity"></activity>
+        <activity android:name=".server.view.ServerHomeActivity"/>
+        <activity android:name=".client.view.ClientHomeActivity"/>
     </application>
 
 </manifest>

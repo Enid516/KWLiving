@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.enid.kwliving.client.view.ClientHomeActivity;
 import com.enid.kwliving.server.ServerUDPBoardCast;
+import com.enid.kwliving.server.view.ServerHomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void selectServer(View view){
-        startActivity(new Intent(this,ServerActivity.class));
+        startActivity(new Intent(this,ServerHomeActivity.class));
     }
 
     public void selectClient(View view){
-        startActivity(new Intent(this,ClientActivity.class));
+        startActivity(new Intent(this,ClientHomeActivity.class));
     }
 }

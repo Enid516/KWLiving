@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/et_total_num"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_total_num"
+        app:layout_constraintLeft_toRightOf="@+id/tv_total_num"
+        app:layout_constraintTop_toTopOf="@+id/tv_total_num"
+        app:layout_constraintVertical_bias="0.612"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/tv_total_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="59dp"
+        android:layout_marginTop="27dp"
+        android:text="total num:"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_v_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="v number:"
+        android:layout_marginRight="1dp"
+        app:layout_constraintRight_toRightOf="@+id/tv_total_num"
+        android:layout_marginTop="37dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_num" />
+
+    <EditText
+        android:id="@+id/et_v_number"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_v_number"
+        app:layout_constraintLeft_toLeftOf="@+id/et_total_num"
+        app:layout_constraintRight_toRightOf="@+id/et_total_num"
+        app:layout_constraintTop_toTopOf="@+id/tv_v_number"
+        app:layout_constraintVertical_bias="0.354"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="max is 4"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_v_number"
+        app:layout_constraintTop_toTopOf="@+id/et_v_number"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/et_v_number"
+        android:layout_marginLeft="37dp"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="comm number:"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/tv_v_number"
+        android:layout_marginTop="48dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_number" />
+
+    <EditText
+        android:id="@+id/et_common_num"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintHorizontal_bias="0.727"
+        app:layout_constraintLeft_toLeftOf="@+id/et_v_number"
+        app:layout_constraintRight_toRightOf="@+id/et_v_number"
+        app:layout_constraintTop_toTopOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.481" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="max is 14"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/textView14"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="@+id/et_common_num"
+        app:layout_constraintBottom_toBottomOf="@+id/et_common_num"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tv_yyj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="44dp"
+        android:text="yyj"
+        app:layout_constraintRight_toRightOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/tv_jz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="20dp"
+        android:text="jz"
+        app:layout_constraintRight_toRightOf="@+id/tv_xnh"
+        app:layout_constraintTop_toBottomOf="@+id/tv_xnh" />
+
+    <TextView
+        android:id="@+id/tv_xnh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="20dp"
+        android:text="xnh"
+        app:layout_constraintRight_toRightOf="@+id/tv_nv"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nv" />
+
+    <TextView
+        android:id="@+id/tv_nv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="20dp"
+        android:text="nv"
+        app:layout_constraintRight_toRightOf="@+id/tv_qbt"
+        app:layout_constraintTop_toBottomOf="@+id/tv_qbt" />
+
+    <TextView
+        android:id="@+id/tv_qbt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="20dp"
+        android:text="qbt"
+        app:layout_constraintRight_toRightOf="@+id/tv_lr"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lr" />
+
+    <TextView
+        android:id="@+id/tv_lr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="20dp"
+        android:text="lr"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_dz"
+        app:layout_constraintRight_toRightOf="@+id/tv_dz"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dz" />
+
+    <TextView
+        android:id="@+id/tv_dz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="20dp"
+        android:text="dz"
+        app:layout_constraintRight_toRightOf="@+id/tv_yyj"
+        app:layout_constraintTop_toBottomOf="@+id/tv_yyj" />
+
+    <CheckBox
+        android:id="@+id/cb_yyj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        tools:layout_editor_absoluteX="145dp"
+        app:layout_constraintTop_toTopOf="@+id/tv_yyj"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.483"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_yyj" />
+
+    <CheckBox
+        android:id="@+id/cb_dz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/cb_yyj"
+        app:layout_constraintTop_toTopOf="@+id/tv_dz"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_dz" />
+
+    <CheckBox
+        android:id="@+id/cb_lr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/cb_dz"
+        app:layout_constraintTop_toTopOf="@+id/tv_lr"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_lr"
+        android:layout_marginBottom="0dp" />
+
+    <CheckBox
+        android:id="@+id/cb_qbt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintTop_toTopOf="@+id/tv_qbt"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_qbt"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintVertical_bias="0.347"
+        app:layout_constraintRight_toRightOf="@+id/cb_lr" />
+
+    <CheckBox
+        android:id="@+id/cb_nv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintTop_toTopOf="@+id/tv_nv"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_nv"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintVertical_bias="0.347"
+        app:layout_constraintRight_toRightOf="@+id/cb_qbt" />
+
+    <CheckBox
+        android:id="@+id/cb_xnh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintTop_toTopOf="@+id/tv_xnh"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_xnh"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintVertical_bias="0.347"
+        app:layout_constraintRight_toRightOf="@+id/cb_nv" />
+
+    <CheckBox
+        android:id="@+id/cb_jz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="7dp"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_jz"
+        app:layout_constraintRight_toRightOf="@+id/cb_xnh"
+        app:layout_constraintTop_toTopOf="@+id/tv_jz"
+        app:layout_constraintVertical_bias="0.318" />
+</android.support.constraint.ConstraintLayout>

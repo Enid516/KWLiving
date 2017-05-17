@@ -1,4 +1,4 @@
-package com.enid.kwliving.ui.activity;
+package com.enid.kwliving.client.view;
 
 import com.enid.kwliving.BaseActivity;
 
