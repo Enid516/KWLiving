@@ -5,4 +5,7 @@ package com.enid.kwliving.server.view;
  */
 
 public interface IServerView {
+    void serverStarted();
+    void serverStopped();
+    void updateMsg(String msg);
 }

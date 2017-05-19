@@ -5,5 +5,16 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/tvPoint"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnInit"
+        android:text="init Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

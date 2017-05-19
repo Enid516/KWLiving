@@ -6,34 +6,48 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.view.ViewParent;
+import android.widget.Toast;
 
 import com.enid.kwliving.BaseActivity;
 import com.enid.kwliving.R;
+import com.enid.kwliving.server.presenter.IServerPresenter;
+import com.enid.kwliving.server.presenter.ServerPresenterImpl;
 
 /**
  * Created by big_love on 2016/12/21.
  */
 
-public class ServerHomeActivity extends BaseActivity{
+public class ServerHomeActivity extends BaseActivity implements IServerView ,DeskFragment.DeskFragmentListener{
     private Fragment currentFragment;
+    private IServerPresenter iServerPresenter;
+    private RoleSettingFragment roleFragment;
+    private DeskFragment deskFragment;
+    private AboutFragment aboutFragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_server_home);
+
+        // init view
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
+        //init fragment
+        roleFragment = new RoleSettingFragment();
+        deskFragment = new DeskFragment();
+        aboutFragment = new AboutFragment();
+
+        //set adapter
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 if (position == 0) {
-                    currentFragment = new RoleSettingFragment();
+                    currentFragment = roleFragment;
                 } else if (position == 1) {
-                    currentFragment = new DeskFragment();
+                    currentFragment = deskFragment;
                 }else if(position == 2){
-                    currentFragment = new AboutFragment();
+                    currentFragment = aboutFragment;
                 }
                 return currentFragment;
             }
@@ -57,7 +71,40 @@ public class ServerHomeActivity extends BaseActivity{
             }
         });
 
+        //set up with viewpager
         tabLayout.setupWithViewPager(viewPager);
 
+        iServerPresenter = new ServerPresenterImpl(this);
+
+        //set listener
+        deskFragment.setListener(this);
+        iServerPresenter.startServer(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        iServerPresenter.stopServer();
+        super.onDestroy();
+    }
+
+    @Override
+    public void serverStarted() {
+        Toast.makeText(this,"server is started",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void serverStopped() {
+        Toast.makeText(this,"server is stopped",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void updateMsg(String msg) {
+        deskFragment.pointMsg(msg);
+    }
+
+    @Override
+    public void clickInit() {
+        iServerPresenter.broadCastMsg("init card");
+        iServerPresenter.updateUIMsg("init card");
     }
 }

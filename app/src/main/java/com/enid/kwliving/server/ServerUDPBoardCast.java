@@ -9,6 +9,8 @@ import android.os.Message;
 import android.util.Log;
 
 import com.enid.kwliving.constant.Constant;
+import com.enid.kwliving.server.presenter.IServerPresenter;
+import com.enid.kwliving.server.presenter.ServerPresenterImpl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -35,6 +37,7 @@ public class ServerUDPBoardCast {
     private static final String TAG = "ServerUDPBoardCast";
     private Context mContext;
     private boolean isRuning = true;
+    private IServerPresenter mIServerPresenter;
     /**
      * 服务端ip地址
      */
@@ -83,8 +86,9 @@ public class ServerUDPBoardCast {
     };
 
     private void setCallBackMessage(String s) {
-        if (mServiceResponseCallBack != null) {
-            mServiceResponseCallBack.onResponse(s);
+        if (mIServerPresenter != null) {
+            mIServerPresenter.updateUIMsg(s);
+            sendClientMsg(s);
         }
     }
 
@@ -97,8 +101,9 @@ public class ServerUDPBoardCast {
         mHandler.sendMessage(message);
     }
 
-    public ServerUDPBoardCast(Context context) {
+    public ServerUDPBoardCast(Context context, ServerPresenterImpl serverPresenter) {
         this.mContext = context;
+        this.mIServerPresenter = serverPresenter;
     }
 
     public void start() {
@@ -129,6 +134,7 @@ public class ServerUDPBoardCast {
 
     /**
      * 获取当前ip
+     *
      * @return
      */
     private String getAddressIP() {
@@ -196,6 +202,7 @@ public class ServerUDPBoardCast {
 
     /**
      * 判断socket是否已经在socketList中
+     *
      * @param socket
      * @return
      */
@@ -232,16 +239,13 @@ public class ServerUDPBoardCast {
                 if (msg != null) {
                     if (msg.equals("exit")) {
                         Log.i(TAG, "run: before remove() size is:" + socketList.size());
-                        //TODO below remove is not remove the socket
-                        socketList.remove(mSocket);
-                        socketList.clear();
+                        removeSocket(mSocket);
                         Log.i(TAG, "run: after remove() size is:" + socketList.size());
                         reader.close();
                         msg = "client" + mSocket.getInetAddress() + " exit\n当前连接数是：" + socketList.size();
                         mSocket.close();
                     } else {
                         msg = "client " + mSocket.getInetAddress() + "send message:" + msg;
-                        sendClientMsg(mSocket);
                     }
                     sendHandlerMessage(msg, CODE_CLIENT_SEND_MESSAGE);
                 }
@@ -251,23 +255,16 @@ public class ServerUDPBoardCast {
 
         }
 
-        private void sendClientMsg(Socket socket) {
-            PrintWriter writer;
-            try {
-                writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-                if (!isConnect(socket)) {
-                    writer.println("服务器已建立连接\n" + msg);
-                } else {
-                    writer.println("服务器响应消息" + Math.random());
+        private void removeSocket(Socket socket) {
+            for (int i = 0; i < socketList.size(); i++) {
+                if (socketList.get(i).getInetAddress().equals(socket.getInetAddress())) {
+                    socketList.remove(socketList.get(i));
                 }
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
 
-    public void sendClientMsg(final int index, final String message) {
+    public void sendClientMsg(final String message) {
         getExecutorService().execute(new Runnable() {
             @Override
             public void run() {
@@ -275,37 +272,29 @@ public class ServerUDPBoardCast {
                     sendHandlerMessage("没有客户端连接到服务器", CODE_CLIENT_CONNECT_ERROR);
                     return;
                 }
-                Socket socket = socketList.get(index);
-                if (socket != null) {
-                    PrintWriter writer;
-                    try {
-                        writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-                        if (!isConnect(socket)) {
-                            writer.println("服务器已建立连接\n");
-                        } else {
-                            writer.println("服务器响应消息:" + message);
-                            Log.i("ServerUDPBoardCast", "服务器响应消息:" + message);
-                        }
+                for (int i = 0; i < socketList.size(); i++) {
+                    Socket socket = socketList.get(i);
+                    if (socket != null) {
+                        PrintWriter writer;
+                        try {
+                            writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+                            if (!isConnect(socket)) {
+                                writer.println("服务器已建立连接\n");
+                            } else {
+                                writer.println("服务器响应消息:" + message);
+                                Log.i("ServerUDPBoardCast", "服务器响应消息:" + message);
+                            }
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                } else {
-                    sendHandlerMessage("没有对应的客户端连接到服务器", CODE_CLIENT_CONNECT_ERROR);
                 }
+
             }
         });
     }
 
-    private ServiceResponseCallBack mServiceResponseCallBack;
-
-    public void setListener(ServiceResponseCallBack callBack) {
-        this.mServiceResponseCallBack = callBack;
-    }
-
-    public interface ServiceResponseCallBack {
-        void onResponse(String s);
-    }
 
     private ExecutorService getExecutorService() {
         if (executorService == null) {
@@ -313,6 +302,7 @@ public class ServerUDPBoardCast {
         }
         return executorService;
     }
+
     public void exit() {
         try {
             serverSocket.close();
